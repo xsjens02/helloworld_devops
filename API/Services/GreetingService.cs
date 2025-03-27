@@ -1,3 +1,7 @@
+using System.Diagnostics;
+using Monitoring;
+using API.Logging;
+
 namespace API.Services;
 
 public class GreetingService
@@ -14,6 +18,9 @@ public class GreetingService
     
     public GreetingResponse Greet(Messages.GreetingRequest request)
     {
+        using var activity = MonitorService.ActivitySource.StartActivity("GreetingService.Greet");
+        Logger.Log(ELogLevel.DEBUG,"Entered Greet-Method in GreetingService");
+        
         var language = request.LanguageCode;
         var greeting = language switch
         {
@@ -35,6 +42,9 @@ public class GreetingService
     
     public string[] GetLanguages()
     {
-        return new [] { "en", "es", "fr", "de", "it", "pt", "ru", "zh", "ya", "ar", "hi", "sw" };
+        using var activity = MonitorService.ActivitySource.StartActivity("GreetingService.GetLanguages");
+        Logger.Log(ELogLevel.DEBUG,"Entered GetLanguages-Method in GreetingService");
+        
+        return new [] { "en", "es", "fr", "de", "it", "pt", "ru", "zh", "ja", "ar", "hi", "sw" };
     }
 }

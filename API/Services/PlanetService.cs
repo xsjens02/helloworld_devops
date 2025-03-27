@@ -1,3 +1,7 @@
+using System.Diagnostics;
+using API.Logging;
+using Monitoring;
+
 namespace API.Services;
 
 public class PlanetService
@@ -9,8 +13,13 @@ public class PlanetService
         get { return _instance ??= new PlanetService(); }
     }
     
+    private PlanetService() {}
+    
     public PlanetResponse GetPlanet()
     {
+        using var activity = MonitorService.ActivitySource.StartActivity("PlanetService.GetPlanet");
+        Logger.Log(ELogLevel.DEBUG,"Entered GetPlanet-Method in PlanetService");
+        
         var planets = new[]
         {
             "Mercury",

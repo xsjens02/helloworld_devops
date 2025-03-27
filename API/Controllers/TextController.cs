@@ -1,7 +1,10 @@
+using System.Diagnostics;
+using API.Logging;
 using API.Models;
 using API.Services;
 using Messages;
 using Microsoft.AspNetCore.Mvc;
+using Monitoring;
 
 namespace API.Controllers;
 
@@ -12,6 +15,9 @@ public class TextController : ControllerBase
     [HttpGet]
     public IActionResult Get(string languageCode)
     {
+        using var activity = MonitorService.ActivitySource.StartActivity("TextController.Get");
+        Logger.Log(ELogLevel.DEBUG,"Entered Get-Method in TextController");
+        
         try
         {
             var greeting = GreetingService.Instance.Greet(new GreetingRequest { LanguageCode = languageCode });
@@ -26,7 +32,12 @@ public class TextController : ControllerBase
         }
         catch (Exception e)
         {
+            Logger.Log(ELogLevel.ERROR, $"Error occurred in Get-Method in TextController: {e.Message}");
             return StatusCode(500, "An error occurred");
+        }
+        finally
+        {
+            activity?.Stop(); 
         }
     }
 }

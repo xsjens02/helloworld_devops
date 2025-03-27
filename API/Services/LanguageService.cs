@@ -1,4 +1,6 @@
 using Messages;
+using API.Logging;
+using Monitoring;
 
 namespace API.Services;
 
@@ -16,6 +18,9 @@ public class LanguageService
     
     public LanguageResponse GetLanguages()
     {
+        using var activity = MonitorService.ActivitySource.StartActivity("LanguageService.GetLanguages");
+        Logger.Log(ELogLevel.DEBUG, "Entered GetLanguages-Method in LanguageService");
+        
         return new LanguageResponse
         {
             Languages = GreetingService.Instance.GetLanguages()

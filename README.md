@@ -6,7 +6,7 @@ This repository contains the code for a school project where the task is to find
 ![rec1](https://github.com/user-attachments/assets/e03e878c-dfe5-4678-82f3-8ba2586dbd4c)
 
 
-### 🛠️ **-----Tools and Technologies Used-----**
+### 🛠️ **----- Tools and Technologies Used -----**
 
 - **Seq** for logging
 
@@ -19,7 +19,7 @@ This repository contains the code for a school project where the task is to find
 - **HTML**, **CSS**, and **JavaScript** for the frontend web application
 
 
-### 🎯 **-----Objective-----**
+### 🎯 **----- Objective -----**
 
 The goal of this project is to:
 
@@ -32,8 +32,9 @@ The goal of this project is to:
 - Diagnose the unknown error
 
 
-### 📍 **-----Error Location-----**
+### 📍 **----- Error Location -----**
 
 The error is located in the `PlanetService.cs` class, specifically within the `GetPlanet` method. 
 
-The issue occurs when the method tries to access an invalid index in one of the collections, leading to an **out-of-bound exception**.
+The issue occurs when the method tries to access an invalid index in one of the collections, 
+leading to an **out-of-bound exception**.
